@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        function generateRandomInteger(min, max){
+        let casualNumber = Math.random()
+        casualNumber = casualNumber * max
+        casualNumber = parseInt(casualNumber)
+        return casualNumber
+    }
+    function sanitize(aaa){
+            
+            aaa= aaa.trim()
+            return aaa
+
+        }
+
+
+    let casualNumber=generateRandomInteger(1,100)
+    i=0
+    console.log(casualNumber)
+    let utente=0
+    alert("è stato generato un numero casuale da 1 a 100, indovina il numero (hai 5 tentativi)")
+    do{
+        
+         utente = prompt("inserisci il numero da indovinare")
+        while (utente===null){
+            utente = prompt("inserisci il numero da indovinare")
+        }
+        utente = sanitize(utente)
+        utente = parseInt(utente)   
+
+        if(utente===casualNumber){
+            console.log("ottimo, hai indovinato il numero casuale")
+
+        }else{
+            if(utente<casualNumber){
+            console.log("numero inserito troppo piccolo")
+            }else{
+            console.log("numero inserito troppo grande")
+            }
+        }
+        i=i+1
+    }while(i<5 && utente!==casualNumber)
+    
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
