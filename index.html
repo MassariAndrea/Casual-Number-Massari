@@ -3,76 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>indovina il numero</title>
+    <title>Indovina il numero</title>
 </head>
 <body>
-    
+    <h1>Inserisci un numero da 1 a 100</h1>
+    <form>
+        <input id="numero" type="number" value="0" max="100" min="1">
+        <input id="butt" type="button" value="invia">
+    </form>
+    <div id="messaggio"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-        function generateRandomInteger(min, max){
-        let casualNumber = Math.random()
-        casualNumber = casualNumber * max
-        casualNumber = parseInt(casualNumber)
-        return casualNumber
-    }
-    function sanitize(aaa){
-            
-            aaa= aaa.trim()
-            return aaa
-
+    <script>
+        function generateRandomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
+        let randomNumber = generateRandomInteger(1, 100);
+        let button = document.querySelector("#butt");
+        let number = document.querySelector("#numero");
+        let message = document.querySelector("#messaggio");
 
-    let casualNumber=generateRandomInteger(1,100)
-    i=0
-    console.log(casualNumber)
-    let utente=0
-    alert("è stato generato un numero casuale da 1 a 100, indovina il numero (hai 5 tentativi)")
-    do{
-        
-         utente = prompt("inserisci il numero da indovinare")
-        while (utente===null){
-            utente = prompt("inserisci il numero da indovinare")
-        }
-        utente = sanitize(utente)
-        utente = parseInt(utente)   
+        button.addEventListener('click', function() {
+            const indovina = parseInt(number.value); 
 
-        if(utente===casualNumber){
-            console.log("ottimo, hai indovinato il numero casuale")
-
-        }else{
-            if(utente<casualNumber){
-            console.log("numero inserito troppo piccolo")
-            }else{
-            console.log("numero inserito troppo grande")
+            if (isNaN(indovina) || indovina < 1 || indovina > 100) {
+                message.textContent = "Per favore, inserisci un numero tra 1 e 100."; 
+                return;
             }
-        }
-        i=i+1
-    }while(i<5 && utente!==casualNumber)
-    
 
-
-
-
-
-
-
-
-
-
+            if (indovina === randomNumber) {
+                message.textContent = "Hai indovinato il numero corretto!";
+            } else if (indovina < randomNumber) {
+                message.textContent = "Hai inserito un numero minore.";
+            } else {
+                message.textContent = "Hai inserito un numero maggiore.";
+            }
+        });
     </script>
 </body>
 </html>
